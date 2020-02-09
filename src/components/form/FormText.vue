@@ -4,7 +4,7 @@
     <input
       class="form-item__input"
       :id="id"
-      @change="handleValueChange"
+      @input="handleValueChange"
       :value="value"
     />
   </div>
@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     handleValueChange(e) {
-      this.$emit("change", e.target.value);
+      this.$emit("input", e.target.value);
     }
   }
 };

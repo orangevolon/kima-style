@@ -43,7 +43,8 @@ const routes = [
       },
       {
         path: "products/:id",
-        component: AdminProduct
+        component: AdminProduct,
+        props: true
       }
     ]
   }
