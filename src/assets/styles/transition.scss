@@ -1,0 +1,11 @@
+$trans-duration-short: 200ms;
+$trans-duration-long: 1.2s;
+$trans-ease: ease-in-out;
+
+@mixin trans-short($property: all) {
+  transition: $property $trans-duration-short $trans-ease;
+}
+
+@mixin trans-long($property: all) {
+  transition: $property $trans-duration-long $trans-ease;
+}
