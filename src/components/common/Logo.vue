@@ -9,7 +9,7 @@
 .logo {
   @include typo-title(1);
 
-  color: $color-accent;
+  color: $color-burnt-sienna;
   padding: 1rem;
 }
 </style>
