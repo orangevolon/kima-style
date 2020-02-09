@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>App</h1>
+    <h1>KimaStyle</h1>
     <app-nav />
     <router-view></router-view>
   </div>

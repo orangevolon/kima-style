@@ -1,0 +1,9 @@
+// base palette
+$color-science-blue: #0476d9;
+$color-burnt-sienna: #f27e63;
+$color-cranberry: #d95284;
+
+// color system
+$color-primary: $color-science-blue;
+$color-secondary: lighten($color-burnt-sienna, 10%);
+$color-accent: $color-cranberry;

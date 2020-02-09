@@ -1,0 +1,42 @@
+@import "@/assets/styles/typography.scss";
+@import "@/assets/styles/color.scss";
+
+body,
+html {
+  @include typo-text(1);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $color-primary;
+  color: $color-secondary;
+}
+
+h1 {
+  @include typo-title(5);
+}
+
+h2 {
+  @include typo-title(4);
+}
+
+h3 {
+  @include typo-title(3);
+}
+
+h4 {
+  @include typo-title(2);
+}
+
+h5 {
+  @include typo-title(1);
+}
+
+a,
+a:visited,
+a:active {
+  color: $color-accent;
+
+  &:hover {
+    color: lighten($color-accent, 20%);
+  }
+}

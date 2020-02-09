@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Raleway&display=swap");
+
+@mixin typo-title($level: 1) {
+  font-size: #{$level}rem;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+}
+
+@mixin typo-text($level: 1) {
+  font-size: #{$level}rem;
+  font-family: "Raleway", sans-serif;
+}
