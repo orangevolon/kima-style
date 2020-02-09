@@ -1,19 +1,12 @@
 <template>
   <div id="app">
-    <h1>Kima/Style</h1>
-    <p>Hand crafted, unique bracelets.</p>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: "App",
-  computed: {
-    testState() {
-      return this.$store.state.testState;
-    }
-  }
+  name: "App"
 };
 </script>
 
