@@ -1,9 +1,17 @@
 <template>
   <header class="admin-header">
-    <h2 class="title">Products</h2>
+    <h2 class="title">{{ title }}</h2>
     <slot name="actions" class="actions" />
   </header>
 </template>
+
+<script>
+export default {
+  props: {
+    title: String
+  }
+};
+</script>
 
 <style lang="scss">
 @import "@/assets/styles/color";

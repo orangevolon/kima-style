@@ -1,6 +1,10 @@
 @import "@/assets/styles/typography.scss";
 @import "@/assets/styles/color.scss";
 
+* {
+  box-sizing: border-box;
+}
+
 body,
 html {
   @include typo-text(1);

@@ -8,6 +8,7 @@ import AppLayout from "@/components/layout/AppLayout";
 // admin pages
 import AdminHome from "@/pages/admin/AdminHome";
 import AdminProducts from "@/pages/admin/AdminProducts";
+import AdminProduct from "@/pages/admin/AdminProduct";
 
 // pages
 import Home from "@/pages/Home";
@@ -39,6 +40,10 @@ const routes = [
       {
         path: "products",
         component: AdminProducts
+      },
+      {
+        path: "products/:id",
+        component: AdminProduct
       }
     ]
   }

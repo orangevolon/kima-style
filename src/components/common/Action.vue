@@ -1,5 +1,5 @@
 <template>
-  <button class="action" :click="handleClick">
+  <button class="action" @click="handleClick" :class="{ primary }">
     <slot>{{ text }}</slot>
   </button>
 </template>
@@ -7,7 +7,11 @@
 <script>
 export default {
   props: {
-    text: String
+    text: String,
+    primary: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     handleClick(e) {
@@ -27,9 +31,9 @@ export default {
   @include trans-short;
 
   padding: 1em 2em;
-  background-color: $color-accent;
-  color: $color-primary;
-  border: none;
+  border: 1px solid $color-accent;
+  background-color: transparent;
+  color: $color-accent;
   display: inline-block;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -40,8 +44,12 @@ export default {
   }
 
   &:hover {
-    background-color: lighten($color-accent, 10%);
     transform: scale(1.02);
+  }
+
+  &.primary {
+    background-color: $color-accent;
+    color: $color-primary;
   }
 }
 </style>
