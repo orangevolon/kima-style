@@ -1,6 +1,12 @@
 <template>
-  <button class="action" @click="handleClick" :class="{ primary }">
-    <slot>{{ text }}</slot>
+  <button
+    class="action"
+    @click="handleClick"
+    :class="{ primary, disabled }"
+    :disabled="disabled || isWaiting"
+  >
+    <span v-if="isWaiting">Waiting...</span>
+    <slot v-else>{{ text }}</slot>
   </button>
 </template>
 
@@ -9,6 +15,14 @@ export default {
   props: {
     text: String,
     primary: {
+      type: Boolean,
+      default: false
+    },
+    isWaiting: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     }
@@ -50,6 +64,14 @@ export default {
   &.primary {
     background-color: $color-accent;
     color: $color-primary;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+
+    &:hover {
+      transform: none;
+    }
   }
 }
 </style>

@@ -1,0 +1,1 @@
+export const WAITER_ADD_PRODUCT = "WAITER_ADD_PRODUCT";
