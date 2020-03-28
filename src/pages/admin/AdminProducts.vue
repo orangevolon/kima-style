@@ -6,12 +6,7 @@
       </action-group>
     </admin-header>
     <waiter :name="WAITER_GET_PRODUCTS">
-      <ul v-if="products">
-        <li
-          v-for="product in products"
-          :key="product.id"
-        >{{product.title}} - {{product.description}}</li>
-      </ul>
+      <ks-table v-if="products.length" :items="products" :header="productHeaders" />
       <p v-else>No Products</p>
     </waiter>
   </section>
@@ -24,16 +19,22 @@ import AdminHeader from "@/components/layout/AdminHeader";
 import Action from "@/components/common/Action";
 import ActionGroup from "@/components/common/ActionGroup";
 import Waiter from "@/components/common/Waiter";
+import Table from "@/components/common/Table";
 
 export default {
   components: {
     AdminHeader,
     ActionGroup,
     Action,
-    Waiter
+    Waiter,
+    KsTable: Table
   },
   computed: mapState("admin", {
-    products: state => state.products
+    products: state =>
+      state.products.map(product => ({
+        title: product.title,
+        description: product.description
+      }))
   }),
   methods: {
     handleAddClick() {
@@ -42,6 +43,7 @@ export default {
   },
   created() {
     this.WAITER_GET_PRODUCTS = WAITER_GET_PRODUCTS;
+    this.productHeaders = ["Title", "Description"];
 
     this.$store.dispatch("admin/getProducts");
   }

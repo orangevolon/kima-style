@@ -4,7 +4,7 @@ import { WAITER_ADD_PRODUCT, WAITER_GET_PRODUCTS } from "@/constants";
 
 const state = {
   selectedProduct: null,
-  products: null
+  products: []
 };
 
 const mutations = {
