@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { WAITER_ADD_PRODUCT } from "@/constants";
+import { WAITER_ADD_PRODUCT, WAITER_GET_PRODUCTS } from "@/constants";
 
 const state = {
   selectedProduct: null,
@@ -32,7 +32,6 @@ const actions = {
     });
   },
   async addNewProduct({ state, dispatch }) {
-    console.log("adding new product");
     try {
       dispatch("startWaiter", WAITER_ADD_PRODUCT, { root: true });
 
@@ -46,7 +45,31 @@ const actions = {
       dispatch("endWaiter", WAITER_ADD_PRODUCT, { root: true });
     }
   },
-  getProducts() {},
+  async getProducts({ commit, dispatch }) {
+    try {
+      dispatch("startWaiter", WAITER_GET_PRODUCTS, { root: true });
+
+      const snapshot = await firebase
+        .firestore()
+        .collection("products")
+        .get();
+
+      const products = [];
+
+      snapshot.forEach(doc => {
+        products.push({
+          ...doc.data(),
+          id: doc.id
+        });
+      });
+
+      commit("setProducts", products);
+    } catch (error) {
+      dispatch("handleError", error, { root: true });
+    } finally {
+      dispatch("endWaiter", WAITER_GET_PRODUCTS, { root: true });
+    }
+  },
   getProduct() {},
   removeProduct() {},
   updateProduct() {}
