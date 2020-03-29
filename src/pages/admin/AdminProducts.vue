@@ -15,8 +15,13 @@
           <ks-table-cell>{{product.title}}</ks-table-cell>
           <ks-table-cell>{{product.description}}</ks-table-cell>
           <ks-table-cell>
-            <action @click="handleTableRowClick(product.id)" flat primary>Delete</action>
-            <action @click="handleTableRowClick(product.id)" flat>Edit</action>
+            <action
+              @click="handleRemoveClick(product.id)"
+              flat
+              primary
+              :isWaiting="$store.getters.isWaiting(`${WAITER_REMOVE_PRODUCT}/${product.id}`)"
+            >Delete</action>
+            <action @click="handleEditClick(product.id)" flat>Edit</action>
           </ks-table-cell>
         </ks-table-row>
       </ks-table>
@@ -27,7 +32,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { WAITER_GET_PRODUCTS } from "@/constants";
+import { WAITER_GET_PRODUCTS, WAITER_REMOVE_PRODUCT } from "@/constants";
 import AdminHeader from "@/components/layout/AdminHeader";
 import Action from "@/components/common/Action";
 import ActionGroup from "@/components/common/ActionGroup";
@@ -46,19 +51,26 @@ export default {
     KsTableRow: TableRow,
     KsTableCell: TableCell
   },
-  computed: mapState("admin", {
-    products: state => state.products
-  }),
+  computed: {
+    ...mapState("admin", {
+      products: state => state.products
+    })
+  },
   methods: {
     handleAddClick() {
       this.$router.push("/admin/products/new");
     },
-    handleTableRowClick(id) {
+    handleEditClick(id) {
       this.$router.push(`/admin/products/${id}`);
+    },
+    handleRemoveClick(id) {
+      this.$store.dispatch("admin/removeProduct", id);
     }
   },
   created() {
     this.WAITER_GET_PRODUCTS = WAITER_GET_PRODUCTS;
+    this.WAITER_REMOVE_PRODUCT = WAITER_REMOVE_PRODUCT;
+
     this.$store.dispatch("admin/getProducts");
   }
 };

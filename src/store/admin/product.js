@@ -3,7 +3,8 @@ import "firebase/firestore";
 import {
   WAITER_ADD_PRODUCT,
   WAITER_GET_PRODUCTS,
-  WAITER_GET_PRODUCT
+  WAITER_GET_PRODUCT,
+  WAITER_REMOVE_PRODUCT
 } from "@/constants";
 
 const state = {
@@ -23,6 +24,9 @@ const mutations = {
   },
   setProducts(state, payload) {
     state.products = payload;
+  },
+  removeProduct(state, payload) {
+    state.products = state.products.filter(product => product.id !== payload);
   }
 };
 
@@ -93,7 +97,27 @@ const actions = {
       dispatch("endWaiter", WAITER_GET_PRODUCT, { root: true });
     }
   },
-  removeProduct() {},
+  async removeProduct({ commit, dispatch }, payload) {
+    try {
+      dispatch("startWaiter", `${WAITER_REMOVE_PRODUCT}/${payload}`, {
+        root: true
+      });
+
+      await firebase
+        .firestore()
+        .collection("products")
+        .doc(payload)
+        .delete();
+
+      commit("removeProduct", payload);
+    } catch (error) {
+      dispatch("handleError", error, { root: true });
+    } finally {
+      dispatch("endWaiter", `${WAITER_REMOVE_PRODUCT}/${payload}`, {
+        root: true
+      });
+    }
+  },
   updateProduct() {}
 };
 
