@@ -43,7 +43,10 @@ const actions = {
         .doc(payload)
         .get();
 
-      const product = snapshot.data();
+      const product = {
+        ...snapshot.data(),
+        id: snapshot.id
+      };
 
       commit("setProduct", product);
     } catch (error) {

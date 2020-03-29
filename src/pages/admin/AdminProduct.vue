@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     ...mapState("admin", {
-      product: state => console.log(state) || state.product
+      product: state => state.product
     }),
     isWaitingForAdd() {
       return this.$store.getters.isWaiting(WAITER_ADD_PRODUCT);
@@ -51,16 +51,19 @@ export default {
   },
   methods: {
     handleTitleChange(value) {
-      this.$store.commit("admin/setSelectedProductTitle", value);
+      this.$store.commit("admin/setProductField", { field: "title", value });
     },
     handleDescriptionChange(value) {
-      this.$store.commit("admin/setSelectedProductDescription", value);
+      this.$store.commit("admin/setProductField", {
+        field: "description",
+        value
+      });
     },
     handleSave() {
       if (this.id === "new") {
-        this.$store.dispatch("admin/addNewProduct");
+        this.$store.dispatch("admin/addNewProduct", this.product);
       } else {
-        this.$store.dispatch("admin/updateProduct");
+        this.$store.dispatch("admin/updateProduct", this.product);
       }
     },
     handleDiscard() {

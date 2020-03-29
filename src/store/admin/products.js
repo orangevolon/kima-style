@@ -3,7 +3,8 @@ import "firebase/firestore";
 import {
   WAITER_ADD_PRODUCT,
   WAITER_GET_PRODUCTS,
-  WAITER_REMOVE_PRODUCT
+  WAITER_REMOVE_PRODUCT,
+  WAITER_UPDATE_PRODUCT
 } from "@/constants";
 
 const state = {
@@ -19,6 +20,12 @@ const mutations = {
   },
   removeProduct(state, payload) {
     state.products = state.products.filter(product => product.id !== payload);
+  },
+  updateProduct(state, payload) {
+    const targetIdx = state.products.findIndex(
+      product => product.id === payload.id
+    );
+    state.products[targetIdx] = payload;
   }
 };
 
@@ -88,7 +95,23 @@ const actions = {
       });
     }
   },
-  updateProduct() {}
+  async updateProduct({ commit, dispatch }, payload) {
+    try {
+      dispatch("startWaiter", WAITER_UPDATE_PRODUCT, { root: true });
+
+      await firebase
+        .firestore()
+        .collection("products")
+        .doc(payload.id)
+        .update(payload);
+
+      commit("updateProduct", payload);
+    } catch (error) {
+      dispatch("handleError", error, { root: true });
+    } finally {
+      dispatch("endWaiter", WAITER_UPDATE_PRODUCT, { root: true });
+    }
+  }
 };
 
 export default {
