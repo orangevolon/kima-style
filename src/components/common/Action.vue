@@ -2,7 +2,7 @@
   <button
     class="action"
     @click="handleClick"
-    :class="{ primary, disabled }"
+    :class="{ primary, disabled, flat }"
     :disabled="disabled || isWaiting"
   >
     <span v-if="isWaiting">Waiting...</span>
@@ -14,6 +14,10 @@
 export default {
   props: {
     text: String,
+    flat: {
+      type: Boolean,
+      default: false
+    },
     primary: {
       type: Boolean,
       default: false
@@ -64,6 +68,17 @@ export default {
   &.primary {
     background-color: $color-accent;
     color: $color-primary;
+  }
+
+  &.flat {
+    padding: 0.2em 1em;
+    background-color: initial;
+    border: initial;
+    color: $color-secondary;
+
+    &.primary {
+      color: $color-accent;
+    }
   }
 
   &.disabled {
