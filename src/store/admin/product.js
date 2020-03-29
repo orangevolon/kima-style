@@ -1,6 +1,10 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { WAITER_ADD_PRODUCT, WAITER_GET_PRODUCTS } from "@/constants";
+import {
+  WAITER_ADD_PRODUCT,
+  WAITER_GET_PRODUCTS,
+  WAITER_GET_PRODUCT
+} from "@/constants";
 
 const state = {
   selectedProduct: null,
@@ -70,7 +74,25 @@ const actions = {
       dispatch("endWaiter", WAITER_GET_PRODUCTS, { root: true });
     }
   },
-  getProduct() {},
+  async getProduct({ commit, dispatch }, payload) {
+    try {
+      dispatch("startWaiter", WAITER_GET_PRODUCT, { root: true });
+
+      const snapshot = await firebase
+        .firestore()
+        .collection("products")
+        .doc(payload)
+        .get();
+
+      const product = snapshot.data();
+
+      commit("setSelectedProduct", product);
+    } catch (error) {
+      dispatch("handleError", error, { root: true });
+    } finally {
+      dispatch("endWaiter", WAITER_GET_PRODUCT, { root: true });
+    }
+  },
   removeProduct() {},
   updateProduct() {}
 };

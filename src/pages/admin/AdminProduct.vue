@@ -6,24 +6,32 @@
         <action text="Save" primary @click="handleSave" :isWaiting="isWaitingForAdd" />
       </action-group>
     </admin-header>
-    <ks-form @submit="handleSave">
-      <form-text label="Title" :value="title" @input="handleTitleChange" />
-      <form-text label="Description" :value="description" @input="handleDescriptionChange" />
-    </ks-form>
+    <waiter :name="WAITER_GET_PRODUCT">
+      <ks-form @submit="handleSave">
+        <form-text label="Title" :value="product.title" @input="handleTitleChange" />
+        <form-text
+          label="Description"
+          :value="product.description"
+          @input="handleDescriptionChange"
+        />
+      </ks-form>
+    </waiter>
   </section>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import { WAITER_GET_PRODUCT, WAITER_ADD_PRODUCT } from "@/constants";
+import Waiter from "@/components/common/Waiter";
 import KsForm from "@/components/form/Form";
 import FormText from "@/components/form/FormText";
 import ActionGroup from "@/components/common/ActionGroup";
 import Action from "@/components/common/Action";
 import AdminHeader from "@/components/layout/AdminHeader";
-import { WAITER_ADD_PRODUCT } from "@/constants";
 
 export default {
   components: {
+    Waiter,
     KsForm,
     FormText,
     Action,
@@ -35,8 +43,7 @@ export default {
   },
   computed: {
     ...mapState("admin", {
-      title: state => state.selectedProduct.title,
-      description: state => state.selectedProduct.description
+      product: state => state.selectedProduct
     }),
     isWaitingForAdd() {
       return this.$store.getters.isWaiting(WAITER_ADD_PRODUCT);
@@ -61,6 +68,8 @@ export default {
     }
   },
   created() {
+    this.WAITER_GET_PRODUCT = WAITER_GET_PRODUCT;
+
     if (this.id === "new") {
       this.$store.dispatch("admin/createNewProduct");
     } else {
