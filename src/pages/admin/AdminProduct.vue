@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     ...mapState("admin", {
-      product: state => state.selectedProduct
+      product: state => console.log(state) || state.product
     }),
     isWaitingForAdd() {
       return this.$store.getters.isWaiting(WAITER_ADD_PRODUCT);
@@ -71,7 +71,7 @@ export default {
     this.WAITER_GET_PRODUCT = WAITER_GET_PRODUCT;
 
     if (this.id === "new") {
-      this.$store.dispatch("admin/createNewProduct");
+      this.$store.dispatch("admin/newProduct");
     } else {
       this.$store.dispatch("admin/getProduct", this.id);
     }

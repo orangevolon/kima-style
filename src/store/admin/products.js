@@ -3,25 +3,14 @@ import "firebase/firestore";
 import {
   WAITER_ADD_PRODUCT,
   WAITER_GET_PRODUCTS,
-  WAITER_GET_PRODUCT,
   WAITER_REMOVE_PRODUCT
 } from "@/constants";
 
 const state = {
-  selectedProduct: null,
   products: []
 };
 
 const mutations = {
-  setSelectedProduct(state, payload) {
-    state.selectedProduct = payload;
-  },
-  setSelectedProductTitle(state, payload) {
-    state.selectedProduct.title = payload;
-  },
-  setSelectedProductDescription(state, payload) {
-    state.selectedProduct.description = payload;
-  },
   setProducts(state, payload) {
     state.products = payload;
   },
@@ -34,25 +23,17 @@ const mutations = {
 };
 
 const actions = {
-  // selected product
-  createNewProduct({ commit }) {
-    commit("setSelectedProduct", {
-      title: "",
-      description: "",
-      image: null
-    });
-  },
-  async addNewProduct({ state, dispatch, commit }) {
+  async addNewProduct({ dispatch, commit }, payload) {
     try {
       dispatch("startWaiter", WAITER_ADD_PRODUCT, { root: true });
 
       const snapshot = await firebase
         .firestore()
         .collection("products")
-        .add(state.selectedProduct);
+        .add(payload);
 
       commit("addProduct", {
-        ...state.selectedProduct,
+        ...payload,
         id: snapshot.id
       });
     } catch (error) {
@@ -86,25 +67,6 @@ const actions = {
       dispatch("endWaiter", WAITER_GET_PRODUCTS, { root: true });
     }
   },
-  async getProduct({ commit, dispatch }, payload) {
-    try {
-      dispatch("startWaiter", WAITER_GET_PRODUCT, { root: true });
-
-      const snapshot = await firebase
-        .firestore()
-        .collection("products")
-        .doc(payload)
-        .get();
-
-      const product = snapshot.data();
-
-      commit("setSelectedProduct", product);
-    } catch (error) {
-      dispatch("handleError", error, { root: true });
-    } finally {
-      dispatch("endWaiter", WAITER_GET_PRODUCT, { root: true });
-    }
-  },
   async removeProduct({ commit, dispatch }, payload) {
     try {
       dispatch("startWaiter", `${WAITER_REMOVE_PRODUCT}/${payload}`, {
@@ -126,7 +88,6 @@ const actions = {
       });
     }
   },
-  // addProductImage({ commit }) {},
   updateProduct() {}
 };
 
