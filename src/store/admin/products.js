@@ -25,6 +25,9 @@ const mutations = {
   setProducts(state, payload) {
     state.products = payload;
   },
+  addProduct(state, payload) {
+    state.products.push(payload);
+  },
   removeProduct(state, payload) {
     state.products = state.products.filter(product => product.id !== payload);
   }
@@ -39,14 +42,19 @@ const actions = {
       image: null
     });
   },
-  async addNewProduct({ state, dispatch }) {
+  async addNewProduct({ state, dispatch, commit }) {
     try {
       dispatch("startWaiter", WAITER_ADD_PRODUCT, { root: true });
 
-      await firebase
+      const snapshot = await firebase
         .firestore()
         .collection("products")
         .add(state.selectedProduct);
+
+      commit("addProduct", {
+        ...state.selectedProduct,
+        id: snapshot.id
+      });
     } catch (error) {
       dispatch("handleError", error, { root: true });
     } finally {
@@ -118,6 +126,7 @@ const actions = {
       });
     }
   },
+  // addProductImage({ commit }) {},
   updateProduct() {}
 };
 

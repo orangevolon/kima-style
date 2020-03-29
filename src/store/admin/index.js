@@ -1,14 +1,14 @@
-import product from "./product";
+import products from "./products";
 
 export default {
   namespaced: true,
   state: {
-    ...product.state
+    ...products.state
   },
   mutations: {
-    ...product.mutations
+    ...products.mutations
   },
   actions: {
-    ...product.actions
+    ...products.actions
   }
 };
