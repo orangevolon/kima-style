@@ -1,17 +1,16 @@
 <template>
-  <div class="form-item">
-    <label class="form-item__label" :for="id">{{ label }}</label>
-    <input
-      class="form-item__input"
-      :id="id"
-      @input="handleValueChange"
-      :value="value"
-    />
-  </div>
+  <form-field :label="label" :id="id">
+    <input class="form-item__input" :id="id" @input="handleValueChange" :value="value" />
+  </form-field>
 </template>
 
 <script>
+import FormField from "./FormField";
+
 export default {
+  components: {
+    FormField
+  },
   props: {
     value: String,
     id: String,
@@ -29,27 +28,17 @@ export default {
 @import "@/assets/styles/color";
 @import "@/assets/styles/typography";
 
-.form-item {
-  margin: 1rem 0;
+.form-item__input {
+  @include typo-text;
+
+  display: block;
+  padding: 0.8em 1em;
+  border: 1px solid $color-secondary;
+  background-color: transparent;
   width: 100%;
 
-  .form-item__label {
-    display: block;
-    margin-bottom: 1em;
-  }
-
-  .form-item__input {
-    @include typo-text;
-
-    display: block;
-    padding: 0.8em 1em;
-    border: 1px solid $color-secondary;
-    background-color: transparent;
-    width: 100%;
-
-    &:focus {
-      outline: none;
-    }
+  &:focus {
+    outline: none;
   }
 }
 </style>
