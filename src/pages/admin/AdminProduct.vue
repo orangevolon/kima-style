@@ -15,6 +15,7 @@
           @input="handleDescriptionChange"
         />
       </ks-form>
+      <product-images />
     </waiter>
   </section>
 </template>
@@ -28,6 +29,7 @@ import FormText from "@/components/form/FormText";
 import ActionGroup from "@/components/common/ActionGroup";
 import Action from "@/components/common/Action";
 import AdminHeader from "@/components/layout/AdminHeader";
+import ProductImages from "@/components/product/ProductImages";
 
 export default {
   components: {
@@ -36,7 +38,8 @@ export default {
     FormText,
     Action,
     AdminHeader,
-    ActionGroup
+    ActionGroup,
+    ProductImages
   },
   props: {
     id: String
