@@ -1,6 +1,3 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-
 // layouts
 import AdminLayout from "@/components/layout/AdminLayout";
 import AppLayout from "@/components/layout/AppLayout";
@@ -15,7 +12,7 @@ import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Products from "@/pages/Products";
 
-const routes = [
+export default [
   {
     path: "/",
     component: AppLayout,
@@ -37,6 +34,9 @@ const routes = [
   {
     path: "/admin",
     component: AdminLayout,
+    meta: {
+      roles: ["admin"],
+    },
     children: [
       {
         path: "",
@@ -54,10 +54,3 @@ const routes = [
     ],
   },
 ];
-
-Vue.use(VueRouter);
-
-export default new VueRouter({
-  mode: "history",
-  routes,
-});
