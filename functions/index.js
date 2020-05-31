@@ -1,8 +1,9 @@
-const functions = require('firebase-functions');
+const functions = require("firebase-functions");
+const firebase = require("firebase-admin");
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+firebase.initializeApp();
+
+// setup genesis admin
+firebase
+  .auth()
+  .setCustomUserClaims("UqZ7YCgd7bVAsdervSnSjmWUeCV2", { roles: ["admin"] });
