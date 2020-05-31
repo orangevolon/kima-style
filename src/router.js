@@ -12,6 +12,7 @@ import AdminProduct from "@/pages/admin/AdminProduct";
 
 // pages
 import Home from "@/pages/Home";
+import Login from "@/pages/Login";
 import Products from "@/pages/Products";
 
 const routes = [
@@ -21,13 +22,17 @@ const routes = [
     children: [
       {
         path: "",
-        component: Home
+        component: Home,
+      },
+      {
+        path: "login",
+        component: Login,
       },
       {
         path: "products",
-        component: Products
-      }
-    ]
+        component: Products,
+      },
+    ],
   },
   {
     path: "/admin",
@@ -35,24 +40,24 @@ const routes = [
     children: [
       {
         path: "",
-        component: AdminHome
+        component: AdminHome,
       },
       {
         path: "products",
-        component: AdminProducts
+        component: AdminProducts,
       },
       {
         path: "products/:id",
         component: AdminProduct,
-        props: true
-      }
-    ]
-  }
+        props: true,
+      },
+    ],
+  },
 ];
 
 Vue.use(VueRouter);
 
 export default new VueRouter({
   mode: "history",
-  routes
+  routes,
 });

@@ -1,6 +1,6 @@
 <template>
   <form-field :label="label" :id="id">
-    <input class="form-item__input" :id="id" @input="handleValueChange" :value="value" />
+    <input class="form-item__input" :id="id" @input="handleValueChange" :value="value" :type="type" />
   </form-field>
 </template>
 
@@ -14,7 +14,8 @@ export default {
   props: {
     value: String,
     id: String,
-    label: String
+    label: String,
+    type: String
   },
   methods: {
     handleValueChange(e) {
