@@ -6,4 +6,4 @@ firebase.initializeApp();
 // setup genesis admin
 firebase
   .auth()
-  .setCustomUserClaims("UqZ7YCgd7bVAsdervSnSjmWUeCV2", { roles: ["admin"] });
+  .setCustomUserClaims("UqZ7YCgd7bVAsdervSnSjmWUeCV2", { role: "admin" });
