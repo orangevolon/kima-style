@@ -20,8 +20,8 @@ export default {
   },
   data() {
     return {
-      email: "",
-      password: ""
+      email: "abstract.stream@gmail.com",
+      password: "GuardianAngel"
     };
   },
   computed: {

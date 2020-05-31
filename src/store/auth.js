@@ -1,10 +1,13 @@
 import firebase from "firebase";
 import { MUTATION_LOGIN, ACTION_LOGIN, WAITER_LOGIN } from "@/constants";
 
+const state = {
+  user: {},
+};
+
 const mutations = {
   [MUTATION_LOGIN](state, user) {
-    const { uid, displayName, email, photoURL } = user;
-    state.user = { uid, displayName, email, photoURL };
+    state.user = user;
   },
 };
 
@@ -17,9 +20,17 @@ const actions = {
         .auth()
         .signInWithEmailAndPassword(email, password);
 
-    console.log(user);
+      const { claims } = await firebase.auth().currentUser.getIdTokenResult();
 
-      commit(MUTATION_LOGIN, user);
+      const userProfile = {
+        uid: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        role: claims.role,
+      };
+
+      commit(MUTATION_LOGIN, userProfile);
     } catch (error) {
       dispatch("handleError", error);
     } finally {
@@ -29,6 +40,7 @@ const actions = {
 };
 
 export default {
+  state,
   mutations,
   actions,
 };
