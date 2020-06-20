@@ -40,19 +40,22 @@ const actions = {
 
       const unsubscribe = firebase.auth().onAuthStateChanged(
         async (user) => {
-          const {
-            claims,
-          } = await firebase.auth().currentUser.getIdTokenResult();
+          if (user) {
+            const {
+              claims,
+            } = await firebase.auth().currentUser.getIdTokenResult();
 
-          const userProfile = {
-            uid: user.uid,
-            displayName: user.displayName,
-            email: user.email,
-            photoURL: user.photoURL,
-            role: claims.role,
-          };
-
-          commit(MUTATION_LOGIN, userProfile);
+            const userProfile = {
+              uid: user.uid,
+              displayName: user.displayName,
+              email: user.email,
+              photoURL: user.photoURL,
+              role: claims.role,
+            };
+            commit(MUTATION_LOGIN, userProfile);
+          } else {
+            commit(MUTATION_LOGOUT);
+          }
         },
         (error) => {
           dispatch("handleError", error);
@@ -66,13 +69,10 @@ const actions = {
       dispatch("endWaiter", WAITER_AUTHORIZE);
     }
   },
-  async [ACTION_LOGOUT]({ commit, dispatch }) {
+  async [ACTION_LOGOUT]({ dispatch }) {
     try {
       dispatch("startWaiter", WAITER_LOGOUT);
-
       await firebase.auth().signOut();
-
-      commit(MUTATION_LOGOUT);
     } catch (error) {
       dispatch("handleError", error);
     } finally {
@@ -82,7 +82,7 @@ const actions = {
 };
 
 const getters = {
-  isLoggedIn: (state) => 'uid' in state.user,
+  isLoggedIn: (state) => "uid" in state.user,
   user: (state) => state.user,
 };
 
