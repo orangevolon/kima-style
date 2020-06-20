@@ -5,9 +5,11 @@ import {
   ACTION_LOGIN,
   ACTION_LOGOUT,
   ACTION_AUTHORIZE,
+  ACTION_REGISTER,
   WAITER_LOGIN,
   WAITER_LOGOUT,
   WAITER_AUTHORIZE,
+  WAITER_REGISTER,
 } from "@/constants";
 
 const state = {
@@ -77,6 +79,21 @@ const actions = {
       dispatch("handleError", error);
     } finally {
       dispatch("endWaiter", WAITER_LOGOUT);
+    }
+  },
+  async [ACTION_REGISTER]({ dispatch }, { email, password, displayName }) {
+    try {
+      dispatch("startWaiter", WAITER_REGISTER);
+
+      const { user } = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+
+      await user.updateProfile({ displayName });
+    } catch (error) {
+      dispatch("handleError", error);
+    } finally {
+      dispatch("endWaiter", WAITER_REGISTER);
     }
   },
 };

@@ -10,6 +10,7 @@ import AdminProduct from "@/pages/admin/AdminProduct";
 // pages
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
+import Register from "@/pages/Register";
 import Products from "@/pages/Products";
 
 export default [
@@ -24,6 +25,10 @@ export default [
       {
         path: "login",
         component: Login,
+      },
+      {
+        path: 'register',
+        component: Register
       },
       {
         path: "products",
