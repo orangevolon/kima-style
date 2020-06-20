@@ -22,8 +22,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/styles/color";
+@import "@/assets/styles/layout";
 
 .app-header {
+  @include wrapper;
+
   width: 100%;
   display: flex;
   align-items: center;
