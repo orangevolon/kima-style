@@ -1,17 +1,25 @@
 <template>
-  <div>
-    <h1>KimaStyle</h1>
-    <app-nav />
+  <article class="app-layout">
+    <app-header />
     <router-view></router-view>
-  </div>
+  </article>
 </template>
 
 <script>
-import AppNav from "./AppNav";
+import AppHeader from "./AppHeader";
 
 export default {
   components: {
-    AppNav
+    AppHeader
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/styles/layout";
+
+.app-layout {
+  max-width: $wrapper-width;
+  margin: auto;
+}
+</style>

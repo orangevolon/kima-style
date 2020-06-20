@@ -11,5 +11,6 @@
 
   color: $color-burnt-sienna;
   padding: 1rem;
+  margin: 0;
 }
 </style>
