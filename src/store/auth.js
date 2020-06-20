@@ -54,6 +54,7 @@ const actions = {
               photoURL: user.photoURL,
               role: claims.role,
             };
+
             commit(MUTATION_LOGIN, userProfile);
           } else {
             commit(MUTATION_LOGOUT);
