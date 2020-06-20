@@ -1,44 +1,34 @@
 <template>
   <section>
     <admin-header title="Product Details">
-      <action-group slot="actions">
-        <action text="Discard" @click="handleDiscard" />
-        <action text="Save" primary @click="handleSave" :isWaiting="isWaitingForAdd" />
-      </action-group>
+      <ks-action-group slot="actions">
+        <ks-action text="Discard" @click="handleDiscard" />
+        <ks-action text="Save" primary @click="handleSave" :isWaiting="isWaitingForAdd" />
+      </ks-action-group>
     </admin-header>
-    <waiter :name="WAITER_GET_PRODUCT">
+    <ks-waiter :name="WAITER_GET_PRODUCT">
       <ks-form @submit="handleSave">
-        <form-text label="Title" :value="product.title" @input="handleTitleChange" />
-        <form-text
+        <ks-form-text label="Title" :value="product.title" @input="handleTitleChange" />
+        <ks-form-text
           label="Description"
           :value="product.description"
           @input="handleDescriptionChange"
         />
       </ks-form>
       <product-images />
-    </waiter>
+    </ks-waiter>
   </section>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import { WAITER_GET_PRODUCT, WAITER_ADD_PRODUCT } from "@/constants";
-import Waiter from "@/components/common/Waiter";
-import KsForm from "@/components/form/Form";
-import FormText from "@/components/form/FormText";
-import ActionGroup from "@/components/common/ActionGroup";
-import Action from "@/components/common/Action";
 import AdminHeader from "@/components/layout/AdminHeader";
 import ProductImages from "@/components/product/ProductImages";
 
 export default {
   components: {
-    Waiter,
-    KsForm,
-    FormText,
-    Action,
     AdminHeader,
-    ActionGroup,
     ProductImages
   },
   props: {

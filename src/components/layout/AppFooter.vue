@@ -1,21 +1,11 @@
 <template>
   <footer class="app-footer">
     <div class="app-footer-content">
-      <logo />
+      <ks-logo />
       <p>Kima Handcrafts</p>
     </div>
   </footer>
 </template>
-
-<script>
-import Logo from "@/components/common/Logo";
-
-export default {
-  components: {
-    Logo
-  }
-};
-</script>
 
 <style lang="scss" scoped>
 @import "@/assets/styles/color";

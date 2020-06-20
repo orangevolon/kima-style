@@ -1,29 +1,21 @@
 <template>
   <ks-form @submit="handleFormSubmit">
-    <form-text v-model="displayName" label="Full Name" :disabled="isWaitingForRegister" />
-    <form-text v-model="email" label="Email Address" :disabled="isWaitingForRegister" />
-    <form-text
+    <ks-form-text v-model="displayName" label="Full Name" :disabled="isWaitingForRegister" />
+    <ks-form-text v-model="email" label="Email Address" :disabled="isWaitingForRegister" />
+    <ks-form-text
       v-model="password"
       label="Password"
       :disabled="isWaitingForRegister"
       type="password"
     />
-    <action primary :isWaiting="isWaitingForRegister">Register</action>
+    <ks-action primary :isWaiting="isWaitingForRegister">Register</ks-action>
   </ks-form>
 </template>
 
 <script>
-import KsForm from "@/components/form/Form";
-import FormText from "@/components/form/FormText";
-import Action from "@/components/common/Action";
 import { ACTION_REGISTER, WAITER_REGISTER } from "@/constants";
 
 export default {
-  components: {
-    KsForm,
-    FormText,
-    Action
-  },
   data() {
     return {
       displayName: "",

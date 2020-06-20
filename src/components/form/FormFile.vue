@@ -1,5 +1,5 @@
 <template>
-  <form-field :label="label" :id="id">
+  <ks-form-field :label="label" :id="id">
     <div class="container">
       <input type="text" class="form-item__input" :value="fileName" disabled />
       <input
@@ -9,20 +9,14 @@
         :id="id"
         @change="handleFileChange"
       />
-      <action @click="handleBrowseClick">Browse</action>
+      <ks-action @click="handleBrowseClick">Browse</ks-action>
     </div>
-  </form-field>
+  </ks-form-field>
 </template>
 
 <script>
-import Action from "@/components/common/Action";
-import FormField from "./FormField";
 
 export default {
-  components: {
-    FormField,
-    Action
-  },
   props: {
     label: String,
     id: String

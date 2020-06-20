@@ -1,7 +1,7 @@
 <template>
   <div class="admin-layout">
     <aside>
-      <logo />
+      <ks-logo />
       <admin-nav />
     </aside>
     <main>
@@ -12,12 +12,10 @@
 
 <script>
 import AdminNav from "./AdminNav";
-import Logo from "@/components/common/Logo";
 
 export default {
   components: {
     AdminNav,
-    Logo
   }
 };
 </script>

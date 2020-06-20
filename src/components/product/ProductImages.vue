@@ -3,14 +3,14 @@
     <p>Images</p>
     <div v-if="productImage">
       <ks-form>
-        <form-text label="Title" :value="productImage.title" @input="handleImageTitleChange" />
-        <form-file v-if="!productImage.url" label="Upload Image" @change="handleImageFileChange" />
+        <ks-form-text label="Title" :value="productImage.title" @input="handleImageTitleChange" />
+        <ks-form-file v-if="!productImage.url" label="Upload Image" @change="handleImageFileChange" />
       </ks-form>
       <img :src="productImage.url" v-if="productImage.url" />
-      <action-group>
-        <action @click="handleAddImage" primary>Add</action>
-        <action @click="handleDiscardAddImage">Discard</action>
-      </action-group>
+      <ks-action-group>
+        <ks-action @click="handleAddImage" primary>Add</ks-action>
+        <ks-action @click="handleDiscardAddImage">Discard</ks-action>
+      </ks-action-group>
     </div>
     <div v-else>
       <ul v-if="product.images">
@@ -19,27 +19,15 @@
         </li>
       </ul>
       <p v-else>No Images</p>
-      <action @click="handleNewImage">Add Image</action>
+      <ks-action @click="handleNewImage">Add Image</ks-action>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import Action from "@/components/common/Action";
-import ActionGroup from "@/components/common/ActionGroup";
-import Form from "@/components/form/Form";
-import FormText from "@/components/form/FormText";
-import FormFile from "@/components/form/FormFile";
 
 export default {
-  components: {
-    Action,
-    ActionGroup,
-    KsForm: Form,
-    FormText,
-    FormFile
-  },
   computed: mapState({
     product: state => state.admin.product,
     productImage: state => state.admin.productImage

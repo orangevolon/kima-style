@@ -6,6 +6,9 @@ import store from "./store";
 // initializing firebase
 import "./firebase";
 
+// registering global components
+import "./globalComponents";
+
 Vue.config.productionTip = false;
 
 new Vue({
