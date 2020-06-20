@@ -7,11 +7,13 @@
 </template>
 
 <style lang="scss" scoped>
+@import "@/assets/styles/layout";
+
 .app-nav {
   display: flex;
 
   .app-nav-link {
-    padding: 0.5em;
+    padding: $spacing-3;
   }
 }
 </style>

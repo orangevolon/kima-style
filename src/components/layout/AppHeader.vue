@@ -1,36 +1,21 @@
 <template>
   <header class="app-header">
-    <app-nav />
-    <logo />
-    <nav v-if="isLoggedIn">
-      <span>{{user.displayName || user.email}}</span>
-      <action @click="handleLogoutClick" flat>Logout</action>
-    </nav>
-    <nav v-else>
-      <router-link to="/login">Login</router-link>
-      <router-link to="/register">Register</router-link>
-    </nav>
+    <app-nav class="app-header-section" />
+    <logo class="app-header-section" />
+    <app-auth class="app-header-section" />
   </header>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { ACTION_LOGOUT } from "@/constants";
-import Action from "@/components/common/Action";
 import AppNav from "./AppNav";
+import AppAuth from "./AppAuth";
 import Logo from "@/components/common/Logo";
 
 export default {
   components: {
     AppNav,
-    Action,
+    AppAuth,
     Logo
-  },
-  computed: mapGetters(["isLoggedIn", "user"]),
-  methods: {
-    handleLogoutClick() {
-      this.$store.dispatch(ACTION_LOGOUT);
-    }
   }
 };
 </script>
@@ -39,10 +24,13 @@ export default {
 @import "@/assets/styles/color";
 
 .app-header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid $color-secondary;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-secondary;
+
+  .app-header-section {
+    flex: 1;
+  }
 }
 </style>
