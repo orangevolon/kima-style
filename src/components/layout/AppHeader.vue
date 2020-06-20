@@ -1,6 +1,5 @@
 <template>
   <header class="app-header">
-    <ks-icon icon="bars" />
     <app-nav class="app-header-section" />
     <ks-logo class="app-header-section" />
     <app-auth class="app-header-section" />
