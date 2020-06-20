@@ -1,1 +1,2 @@
 export const MUTATION_LOGIN = 'MUTATION_LOGIN';
+export const MUTATION_LOGOUT = 'MUTATION_LOGOUT';
