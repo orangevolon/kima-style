@@ -3,13 +3,13 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-//initializing firebase
+// initializing firebase
 import "./firebase";
 
 Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App),
+  render: (h) => h(App),
   router,
-  store
+  store,
 }).$mount("#app");

@@ -7,6 +7,10 @@ $spacing-4: 0.89rem;
 $spacing-5: 1.47rem;
 $spacing-6: 2.44rem;
 
+$screen-desktop: 'min-width: 1024px';
+$screen-tablet: 'min-width: 640px and max-width: 1024px';
+$screen-mobile: 'max-width: 640px';
+
 @mixin wrapper {
   max-width: $wrapper-width;
   margin: auto;

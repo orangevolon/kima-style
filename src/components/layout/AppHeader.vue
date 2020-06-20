@@ -1,5 +1,6 @@
 <template>
   <header class="app-header">
+    <ks-icon icon="bars" />
     <app-nav class="app-header-section" />
     <logo class="app-header-section" />
     <app-auth class="app-header-section" />
@@ -10,12 +11,14 @@
 import AppNav from "./AppNav";
 import AppAuth from "./AppAuth";
 import Logo from "@/components/common/Logo";
+import KsIcon from "@/components/common/Icon";
 
 export default {
   components: {
     AppNav,
     AppAuth,
-    Logo
+    Logo,
+    KsIcon
   }
 };
 </script>
