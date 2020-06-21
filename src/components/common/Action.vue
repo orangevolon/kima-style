@@ -5,7 +5,9 @@
     :class="{ primary, disabled, flat }"
     :disabled="disabled || isWaiting"
   >
-    <span v-if="isWaiting">Waiting...</span>
+    <div class="action-spinner-container" v-if="isWaiting && !flat">
+      <ks-spinner />
+    </div>
     <ks-icon v-if="icon" :icon="icon" />
     <slot v-else>{{ text }}</slot>
   </button>
@@ -58,6 +60,7 @@ export default {
   background-color: transparent;
   color: $color-accent;
   display: inline-block;
+  position: relative;
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
@@ -92,6 +95,19 @@ export default {
     &:hover {
       transform: none;
     }
+  }
+
+  .action-spinner-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    background-color: $color-accent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>

@@ -11,6 +11,7 @@ import TableCell from "@/components/common/TableCell";
 import TableRow from "@/components/common/TableRow";
 import Waiter from "@/components/common/Waiter";
 import Divider from "@/components/common/Divider";
+import Spinner from "@/components/common/Spinner";
 
 // form
 import Form from "@/components/form/Form";
@@ -28,6 +29,7 @@ Vue.component("ks-table-cell", TableCell);
 Vue.component("ks-table-row", TableRow);
 Vue.component("ks-waiter", Waiter);
 Vue.component("ks-divider", Divider);
+Vue.component("ks-spinner", Spinner);
 Vue.component("ks-form", Form);
 Vue.component("ks-form-field", FormField);
 Vue.component("ks-form-file", FormFile);
