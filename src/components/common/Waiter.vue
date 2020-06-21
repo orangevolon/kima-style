@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <p v-if="isWaiting">Loading...</p>
+  <div class="waiter-container">
+    <ks-spinner v-if="isWaiting" />
     <slot v-else></slot>
   </div>
 </template>
