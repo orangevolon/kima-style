@@ -6,6 +6,7 @@
     :disabled="disabled || isWaiting"
   >
     <span v-if="isWaiting">Waiting...</span>
+    <ks-icon v-if="icon" :icon="icon" />
     <slot v-else>{{ text }}</slot>
   </button>
 </template>
@@ -29,6 +30,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    icon: {
+      type: String,
+      default: ""
     }
   },
   methods: {
