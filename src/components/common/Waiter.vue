@@ -1,6 +1,8 @@
 <template>
   <div class="waiter-container">
-    <ks-spinner v-if="isWaiting" />
+    <div v-if="isWaiting" class="waiter-spinner-container">
+      <ks-spinner />
+    </div>
     <slot v-else></slot>
   </div>
 </template>
@@ -17,3 +19,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.waiter-spinner-container {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
