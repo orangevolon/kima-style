@@ -13,6 +13,7 @@ import Waiter from "@/components/common/Waiter";
 import Divider from "@/components/common/Divider";
 import Spinner from "@/components/common/Spinner";
 import EmptyPlaceholder from "@/components/common/EmptyPlaceholder";
+import Section from "@/components/common/Section";
 
 // form
 import Form from "@/components/form/Form";
@@ -32,6 +33,7 @@ Vue.component("ks-waiter", Waiter);
 Vue.component("ks-divider", Divider);
 Vue.component("ks-spinner", Spinner);
 Vue.component("ks-empty-placeholder", EmptyPlaceholder);
+Vue.component("ks-section", Section);
 Vue.component("ks-form", Form);
 Vue.component("ks-form-field", FormField);
 Vue.component("ks-form-file", FormFile);
