@@ -8,8 +8,12 @@
     <div class="action-spinner-container" v-if="isWaiting && !flat">
       <ks-spinner />
     </div>
-    <ks-icon v-if="icon" :icon="icon" />
-    <slot v-else>{{ text }}</slot>
+    <div class="action-content">
+      <ks-icon class="action-icon" v-if="icon" :icon="icon" />
+      <span class="action-text">
+        <slot>{{ text }}</slot>
+      </span>
+    </div>
   </button>
 </template>
 
@@ -50,6 +54,7 @@ export default {
 @import "@/assets/styles/typography";
 @import "@/assets/styles/color";
 @import "@/assets/styles/transition";
+@import "@/assets/styles/layout";
 
 .action {
   @include typo-text;
@@ -108,6 +113,15 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .action-content {
+    display: flex;
+    align-items: center;
+
+    .action-icon + .action-text {
+      margin-left: $spacing-3;
+    }
   }
 }
 </style>
