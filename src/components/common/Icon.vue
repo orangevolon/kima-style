@@ -5,9 +5,14 @@
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faTimes,
+  faTrash,
+  faEdit
+} from "@fortawesome/free-solid-svg-icons";
 
-library.add(faBars, faTimes);
+library.add(faBars, faTimes, faTrash, faEdit);
 
 export default {
   components: {
