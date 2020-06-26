@@ -1,10 +1,10 @@
 <template>
   <div class="admin-layout">
-    <aside>
+    <aside class="admin-layout-aside">
       <ks-logo />
       <admin-nav />
     </aside>
-    <main>
+    <main class="admin-layout-main">
       <router-view></router-view>
     </main>
   </div>
@@ -29,14 +29,14 @@ export default {
   grid-template-columns: 196px auto;
   grid-template-areas: "nav content";
 
-  aside {
+  .admin-layout-aside {
     background-color: $color-secondary;
     grid-area: nav;
     grid-area: nav;
     height: 100%;
   }
 
-  main {
+  .admin-layout-main {
     grid-area: content;
     padding: 2rem;
   }
