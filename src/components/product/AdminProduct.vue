@@ -1,28 +1,25 @@
 <template>
-  <section>
-    <admin-header title="Product Details">
-      <ks-action-group slot="actions">
-        <ks-action text="Discard" @click="handleDiscard" />
-        <ks-action text="Save" primary @click="handleSave" :isWaiting="isWaitingForAdd" />
-      </ks-action-group>
-    </admin-header>
-    <admin-product />
-  </section>
+  <ks-waiter :name="WAITER_GET_PRODUCT">
+    <ks-form @submit="handleSave">
+      <ks-form-text label="Title" :value="product.title" @input="handleTitleChange" />
+      <ks-form-text
+        label="Description"
+        :value="product.description"
+        @input="handleDescriptionChange"
+      />
+    </ks-form>
+    <admin-product-images />
+  </ks-waiter>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import { WAITER_ADD_PRODUCT } from "@/constants";
-import AdminHeader from "@/components/layout/AdminHeader";
-import AdminProduct from "@/components/product/AdminProduct";
+import { WAITER_GET_PRODUCT, WAITER_ADD_PRODUCT } from "@/constants";
+import AdminProductImages from "@/components/product/AdminProductImages";
 
 export default {
   components: {
-    AdminHeader,
-    AdminProduct
-  },
-  props: {
-    id: String
+    AdminProductImages
   },
   computed: {
     ...mapState("admin", {
@@ -54,11 +51,7 @@ export default {
     }
   },
   created() {
-    if (this.id === "new") {
-      this.$store.dispatch("admin/newProduct");
-    } else {
-      this.$store.dispatch("admin/getProduct", this.id);
-    }
+    this.WAITER_GET_PRODUCT = WAITER_GET_PRODUCT;
   }
 };
 </script>
