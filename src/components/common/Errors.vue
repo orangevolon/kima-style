@@ -32,6 +32,7 @@ export default {
   width: 100vw;
   padding: 0;
   margin: 0;
+  z-index: 100;
 
   .error {
     background-color: $color-accent;

@@ -36,7 +36,7 @@ export default {
     height: 100%;
   }
 
-  .admin-layout-main {
+  main {
     grid-area: content;
     padding: 2rem;
   }

@@ -6,7 +6,7 @@
         <ks-action text="Save" primary @click="handleSave" :isWaiting="isWaitingForAdd" />
       </ks-action-group>
     </admin-header>
-    <admin-product />
+    <admin-product :id="id" />
   </section>
 </template>
 
@@ -51,13 +51,6 @@ export default {
     },
     handleDiscard() {
       this.$router.push("/admin/products");
-    }
-  },
-  created() {
-    if (this.id === "new") {
-      this.$store.dispatch("admin/newProduct");
-    } else {
-      this.$store.dispatch("admin/getProduct", this.id);
     }
   }
 };

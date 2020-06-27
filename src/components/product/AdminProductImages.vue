@@ -1,56 +1,62 @@
 <template>
-  <div>
-    <p>Images</p>
-    <div v-if="productImage">
-      <ks-form>
-        <ks-form-text label="Title" :value="productImage.title" @input="handleImageTitleChange" />
-        <ks-form-file v-if="!productImage.url" label="Upload Image" @change="handleImageFileChange" />
-      </ks-form>
-      <img :src="productImage.url" v-if="productImage.url" />
-      <ks-action-group>
-        <ks-action @click="handleAddImage" primary>Add</ks-action>
-        <ks-action @click="handleDiscardAddImage">Discard</ks-action>
-      </ks-action-group>
-    </div>
-    <div v-else>
-      <ul v-if="product.images">
-        <li v-for="image of product.images" :key="image.id">
-          <img :src="image.url" />
-        </li>
-      </ul>
-      <p v-else>No Images</p>
-      <ks-action @click="handleNewImage">Add Image</ks-action>
-    </div>
-  </div>
+  <ks-waiter :name="WAITER_GET_PRODUCT_IMAGES">
+    <ul class="product-images">
+      <li v-for="image in productImages" :key="image.id" class="product-image">
+        <ks-action flat class="product-image-wrapper" @click="handleImageSelect(image.id)">
+          <img class="product-image__img" :src="image.url" :alt="image.title" />
+        </ks-action>
+      </li>
+    </ul>
+  </ks-waiter>
 </template>
 
 <script>
+import { WAITER_GET_PRODUCT_IMAGES } from "@/constants";
 import { mapState } from "vuex";
 
 export default {
   computed: mapState({
-    product: state => state.admin.product,
-    productImage: state => state.admin.productImage
+    productImages: state => state.admin.productImages
   }),
   methods: {
-    handleNewImage() {
-      this.$store.dispatch("admin/newProductImage");
-    },
-    handleImageTitleChange(value) {
-      this.$store.commit("admin/setProductImageField", {
-        field: "title",
-        value
-      });
-    },
-    handleImageFileChange(file) {
-      this.$store.dispatch("admin/uploadProductImage", file);
-    },
-    handleAddImage() {
-      this.$store.dispatch("admin/addProductImage");
-    },
-    handleDiscardAddImage() {
-      this.$store.commit("admin/setProductImage", null);
+    handleImageSelect(id) {
+      const productId = this.$store.state.admin.product.id;
+      this.$router.push(`/admin/products/${productId}/images/${id}`);
     }
+  },
+  created() {
+    this.WAITER_GET_PRODUCT_IMAGES = WAITER_GET_PRODUCT_IMAGES;
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/styles/layout";
+
+.product-images {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+
+  .product-image {
+    flex: 0 1 40%;
+    list-style: none;
+    margin: $spacing-2;
+
+    .product-image-wrapper {
+      height: 0;
+      width: 100%;
+      padding: 50% 0;
+      position: relative;
+    }
+
+    .product-image__img {
+      position: absolute;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+</style>

@@ -9,10 +9,12 @@ import {
   faBars,
   faTimes,
   faTrash,
-  faEdit
+  faEdit,
+  faPlus,
+  faEllipsisH
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faBars, faTimes, faTrash, faEdit);
+library.add(faBars, faTimes, faTrash, faEdit, faPlus, faEllipsisH);
 
 export default {
   components: {
