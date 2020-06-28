@@ -1,6 +1,6 @@
 <template>
   <ks-waiter :name="WAITER_GET_PRODUCTS">
-    <ks-table v-if="products">
+    <ks-table v-if="products && products.length" >
       <ks-table-row slot="header">
         <ks-table-cell>Title</ks-table-cell>
         <ks-table-cell>Description</ks-table-cell>
@@ -22,7 +22,7 @@
         </ks-table-cell>
       </ks-table-row>
     </ks-table>
-    <p v-else>No Products</p>
+    <ks-empty-placeholder v-else text="No products yet!" />
   </ks-waiter>
 </template>
 
