@@ -13,10 +13,6 @@
       :disabled="waitForSaveImage"
     />
     <ks-image :ratio="1/3" :src="productImage.url" v-if="productImage.url" />
-    <ks-action-group>
-      <ks-action @click="handleAddImage" :isWaiting="waitForSaveImage" primary>Add</ks-action>
-      <ks-action @click="handleDiscardAddImage">Discard</ks-action>
-    </ks-action-group>
   </ks-form>
 </template>
 
@@ -24,7 +20,6 @@
 import { mapState } from "vuex";
 import {
   MUTATION_SET_PRODUCT_IMAGE_FIELD,
-  ACTION_SAVE_PRODUCT_IMAGE,
   WAITER_SAVE_PRODUCT_IMAGE
 } from "@/constants";
 
@@ -46,12 +41,6 @@ export default {
     handleImageFileChange(file) {
       this.$store.commit(`admin/${MUTATION_SET_PRODUCT_IMAGE_FIELD}`, { file });
     },
-    handleAddImage() {
-      this.$store.dispatch(`admin/${ACTION_SAVE_PRODUCT_IMAGE}`);
-    },
-    handleDiscardAddImage() {
-      this.$store.commit(`admin/${ACTION_SAVE_PRODUCT_IMAGE}`, null);
-    }
   }
 };
 </script>

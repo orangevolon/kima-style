@@ -40,7 +40,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/styles/layout";
-@import "@/assets/styles/color";
 
 .images-container {
   width: 100%;
@@ -48,7 +47,6 @@ export default {
   flex-wrap: wrap;
   margin: 0;
   padding: $spacing-4;
-  border: 1px solid $color-secondary;
 
   .image-item {
     list-style: none;
