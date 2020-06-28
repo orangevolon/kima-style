@@ -12,7 +12,7 @@
       @change="handleImageFileChange"
       :disabled="waitForSaveImage"
     />
-    <img class="product-image" :src="productImage.url" v-if="productImage.url" />
+    <ks-image :ratio="1/3" :src="productImage.url" v-if="productImage.url" />
     <ks-action-group>
       <ks-action @click="handleAddImage" :isWaiting="waitForSaveImage" primary>Add</ks-action>
       <ks-action @click="handleDiscardAddImage">Discard</ks-action>
@@ -55,11 +55,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.product-image {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-}
-</style>

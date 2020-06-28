@@ -40,7 +40,15 @@ const actions = {
       dispatch(ACTION_WAITER_START, WAITER_GET_PRODUCT_IMAGE, { root: true });
 
       const url = `/products/${productId}/images/${id}`;
-      const image = await firebase.firestore().doc(url);
+      const snap = await firebase
+        .firestore()
+        .doc(url)
+        .get();
+
+      const image = {
+        ...snap.data(),
+        id: snap.id,
+      };
 
       commit(MUTATION_SET_PRODUCT_IMAGE, image);
     } catch (error) {

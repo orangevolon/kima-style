@@ -1,25 +1,34 @@
 <template>
   <ks-waiter :name="WAITER_GET_PRODUCT_IMAGES">
-    <ul class="product-images">
-      <li v-for="image in productImages" :key="image.id" class="product-image">
-        <ks-action flat class="product-image-wrapper" @click="handleImageSelect(image.id)">
-          <img class="product-image__img" :src="image.url" :alt="image.title" />
-        </ks-action>
-      </li>
-    </ul>
+    <images :images="productImages" @delete="handleImageDelete" @edit="handleImageEdit" />
   </ks-waiter>
 </template>
 
 <script>
-import { WAITER_GET_PRODUCT_IMAGES } from "@/constants";
+import Images from "@/components/composites/Images";
+import {
+  WAITER_GET_PRODUCT_IMAGES,
+  ACTION_DELETE_PRODUCT_IMAGE
+} from "@/constants";
 import { mapState } from "vuex";
 
 export default {
+  components: {
+    Images
+  },
   computed: mapState({
     productImages: state => state.admin.productImages
   }),
   methods: {
-    handleImageSelect(id) {
+    handleImageDelete(id) {
+      const productId = this.$store.state.admin.product.id;
+
+      this.$store.dispatch(`admin/${ACTION_DELETE_PRODUCT_IMAGE}`, {
+        id,
+        productId
+      });
+    },
+    handleImageEdit(id) {
       const productId = this.$store.state.admin.product.id;
       this.$router.push(`/admin/products/${productId}/images/${id}`);
     }
@@ -29,34 +38,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-@import "@/assets/styles/layout";
-
-.product-images {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-
-  .product-image {
-    flex: 0 1 40%;
-    list-style: none;
-    margin: $spacing-2;
-
-    .product-image-wrapper {
-      height: 0;
-      width: 100%;
-      padding: 50% 0;
-      position: relative;
-    }
-
-    .product-image__img {
-      position: absolute;
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
-</style>

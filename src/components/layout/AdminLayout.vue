@@ -20,7 +20,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/styles/color";
 
 .admin-layout {
@@ -36,7 +36,7 @@ export default {
     height: 100%;
   }
 
-  main {
+  .admin-layout-main {
     grid-area: content;
     padding: 2rem;
   }
